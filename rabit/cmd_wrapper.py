@@ -1,7 +1,7 @@
-# (c) 2020 Frabit Project maintained and limited by Blylei < blylei918@gmail.com >
+# (c) 2020 Rabit Project maintained and limited by Blylei < blylei918@gmail.com >
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 #
-# This file is part of Frabit
+# This file is part of Rabit
 #
 from __future__ import print_function
 
@@ -506,7 +506,7 @@ class Command:
 
         # Import the output module inside the function to avoid circular
         # dependency
-        from frabit import output
+        from rabit import output
 
         def handler(line):
             if line:
@@ -548,7 +548,7 @@ class Command:
 class Rsync(Command):
     """
     This class is a wrapper for the rsync system command,
-    which is used vastly by frabit
+    which is used vastly by Rabit
     """
 
     def __init__(self, rsync='rsync', args=None, ssh=None, ssh_options=None, bwlimit=None, exclude=None,
@@ -694,7 +694,7 @@ class MySQLClient(Command):
         # is executable and runs without errors.
         for path_entry in path.split(os.path.pathsep):
             for cmd in cls.COMMAND_ALTERNATIVES:
-                full_path = frabit.utils.which(cmd, path_entry)
+                full_path = rabit.utils.which(cmd, path_entry)
 
                 # It doesn't exist try another
                 if not full_path:
@@ -749,7 +749,7 @@ class MySQLClient(Command):
 
         # Extract the major version
         version_info['full_version'] = Version(full_version)
-        version_info['major_version'] = Version(frabit.utils.simplify_version(full_version))
+        version_info['major_version'] = Version(rabit.utils.simplify_version(full_version))
         return version_info
 
 
@@ -900,18 +900,18 @@ class Mysqlpump(MySQLClient):
             self.args += args
 
 
-class FrabitSubProcess:
+class RabitSubProcess:
     """
-    Wrapper class for frabit sub instances
+    Wrapper class for Rabit sub instances
     """
 
     def __init__(self, command=sys.argv[0], subcommand=None, config=None, args=None, keep_descriptors=False):
         """
-        Build a specific wrapper for all the frabit sub-commands, providing an unified interface.
+        Build a specific wrapper for all the Rabit sub-commands, providing an unified interface.
 
-        :param str command: path to frabit
-        :param str subcommand: the frabit sub-command
-        :param str config: path to the frabit configuration file.
+        :param str command: path to Rabit
+        :param str subcommand: the Rabit sub-command
+        :param str config: path to the Rabit configuration file.
         :param list[str] args: a list containing the sub-command args like the target server name
         :param bool keep_descriptors: whether to keep the subprocess stdin,  stdout, stderr descriptors attached.
          Defaults to False
@@ -924,7 +924,7 @@ class FrabitSubProcess:
         # even in case of the default one.
         if not config:
             raise CommandFailedException(
-                "No configuration file passed to frabit subprocess")
+                "No configuration file passed to Rabit subprocess")
         # Build the sub-command:
         # * be sure to run it with the right python interpreter
         # * pass the current configuration file with -c
@@ -939,7 +939,7 @@ class FrabitSubProcess:
         """
         Execute the command and pass the output to the configured handlers
         """
-        _logger.debug("FrabitSubProcess: {}".format(self.command))
+        _logger.debug("RabitSubProcess: {}".format(self.command))
         # Redirect all descriptors to /dev/null
         devnull = open(os.devnull, 'a+')
 
@@ -949,7 +949,7 @@ class FrabitSubProcess:
 
         proc = subprocess.Popen(self.command, preexec_fn=os.setsid, close_fds=True, stdin=devnull,
                                 **additional_arguments)
-        _logger.debug("FrabitSubProcess: subprocess started. pid: {}".format(proc.pid))
+        _logger.debug("RabitSubProcess: subprocess started. pid: {}".format(proc.pid))
 
 
 def shell_quote(arg):
