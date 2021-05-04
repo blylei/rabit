@@ -1,7 +1,7 @@
-# (c) 2020 Frabit Project maintained and limited by Blylei < blylei918@gmail.com >
+# (c) 2020 Rabit Project maintained and limited by Blylei < blylei918@gmail.com >
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 #
-# This file is part of Frabit
+# This file is part of Rabit
 #
 """
 This module control how the output of Barman will be rendered
@@ -15,10 +15,10 @@ import json
 import logging
 import sys
 
-from frabit.info import BackupInfo
-from frabit.utils import (FrabitEncoder, force_str, human_readable_timedelta,
+from rabit.info import BackupInfo
+from rabit.utils import (RabitEncoder, force_str, human_readable_timedelta,
                           pretty_size, redact_passwords)
-from frabit.binlog import diff_lsn
+from rabit.binlog import diff_lsn
 
 __all__ = [
     'error_occurred', 'debug', 'info', 'warning', 'error', 'exception',

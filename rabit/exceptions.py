@@ -6,26 +6,26 @@
 from mysql.connector.errors import DatabaseError, InterfaceError, PoolError
 
 
-class FrabitException(Exception):
+class RabitException(Exception):
     """
-    The base class of all other Frabit exceptions
+    The base class of all other Rabit exceptions
     """
 
 
-class ConfigurationException(FrabitException):
+class ConfigurationException(RabitException):
     """
     Base exception for all the Configuration errors
     """
 
 
-class CommandException(FrabitException):
+class CommandException(RabitException):
     """
     Base exception for all the errors related to
     the execution of a Command.
     """
 
 
-class CompressionException(FrabitException):
+class CompressionException(RabitException):
     """
     Base exception for all the errors related to
     the execution of a compression action.
@@ -86,7 +86,7 @@ class MysqlInterfaceError(InterfaceError):
     """
 
 
-class BackupException(FrabitException):
+class BackupException(RabitException):
     """
     Base exception for all the errors related to the execution of a backup.
     """
@@ -104,19 +104,19 @@ class BackupInfoBadInitialisation(BackupException):
     """
 
 
-class HookScriptException(FrabitException):
+class HookScriptException(RabitException):
     """
     Base exception for all the errors related to Hook Script execution.
     """
 
 
-class LockFileException(FrabitException):
+class LockFileException(RabitException):
     """
     Base exception for lock related errors
     """
 
 
-class SyncException(FrabitException):
+class SyncException(RabitException):
     """
     Base Exception for synchronisation functions
     """
@@ -201,7 +201,7 @@ class DataTransferFailure(CommandException):
             return cls(details)
         except (TypeError, NameError):
             # If it is not a dictionary just convert it to a string
-            from frabit.utils import force_str
+            from rabit.utils import force_str
             return cls(force_str(e.args))
 
 
@@ -248,7 +248,7 @@ class BinlogHasPurged(MysqlException):
     def __str__(self):
         # Returns the first line
         if self.args and self.args[0]:
-            from frabit.utils import force_str
+            from rabit.utils import force_str
             return force_str(self.args[0]).splitlines()[0].strip()
         else:
             return ''
@@ -273,7 +273,7 @@ class AbortedRetryHookScript(HookScriptException):
                 self.hook.script, self.hook.exit_status))
 
 
-class RecoveryException(FrabitException):
+class RecoveryException(RabitException):
     """
     Exception for a recovery error
     """
