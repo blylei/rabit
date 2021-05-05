@@ -6,6 +6,16 @@ The major command include:
 - sync
 - pull-binlog
 
+## 1、Install
+pip
+```
+pip install rabit
+```
+build install from source code
+```
+pip install rabit
+```
+## 2、Use case
 ### Make a backup
 ```bash
 rabit backup --optins
