@@ -13,7 +13,9 @@ pip install rabit
 ```
 build install from source code
 ```
-pip install rabit
+git clone https://github.com/blylei/rabit.git
+cd rabit
+python setup.py install
 ```
 ## 2、Use case
 ### Make a backup
