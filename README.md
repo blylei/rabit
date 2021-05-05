@@ -2,7 +2,6 @@
 A client agent that execute remote command submitted by Frabit.
 The command include:
 - backup
+- restore
 - sync
-- compression
-- prepare
-- decompression
+- pull-binlog
