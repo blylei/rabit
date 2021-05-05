@@ -545,13 +545,13 @@ class Command:
         signal.signal(signal_id, _handler)
 
 
-class Rsync(Command):
+class Scp(Command):
     """
     This class is a wrapper for the rsync system command,
     which is used vastly by Rabit
     """
 
-    def __init__(self, rsync='rsync', args=None, ssh=None, ssh_options=None, bwlimit=None, exclude=None,
+    def __init__(self, rsync='scp', args=None, ssh=None, ssh_options=None, bwlimit=None, exclude=None,
                  exclude_and_protect=None, include=None, network_compression=None, path=None, **kwargs):
         """
         :param str rsync: rsync executable name
@@ -900,7 +900,7 @@ class Mysqlpump(MySQLClient):
             self.args += args
 
 
-class RabitSubProcess:
+class RabitProcess:
     """
     Wrapper class for Rabit sub instances
     """
@@ -939,7 +939,7 @@ class RabitSubProcess:
         """
         Execute the command and pass the output to the configured handlers
         """
-        _logger.debug("RabitSubProcess: {}".format(self.command))
+        _logger.debug("RabitProcess: {}".format(self.command))
         # Redirect all descriptors to /dev/null
         devnull = open(os.devnull, 'a+')
 
@@ -949,7 +949,7 @@ class RabitSubProcess:
 
         proc = subprocess.Popen(self.command, preexec_fn=os.setsid, close_fds=True, stdin=devnull,
                                 **additional_arguments)
-        _logger.debug("RabitSubProcess: subprocess started. pid: {}".format(proc.pid))
+        _logger.debug("RabitProcess: subprocess started. pid: {}".format(proc.pid))
 
 
 def shell_quote(arg):
