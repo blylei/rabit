@@ -1,5 +1,5 @@
 # rabit
-A client agent that execute remote command submitted by Rabit.
+A client agent that execute remote command submitted by Frabit.
 command include:
 - backup
 - sync
