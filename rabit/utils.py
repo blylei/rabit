@@ -561,3 +561,17 @@ def check_size(value):
     if int_value is None or int_value < 1:
         raise ArgumentTypeError("'{}' is not a valid size string".format(value))
     return int_value
+
+
+if __name__ == '__main__':
+    # This code requires the mock module and allow us to test
+    # bash completion inside the IDE debugger
+    try:
+        # noinspection PyUnresolvedReferences
+        import mock
+        sys.stdout = mock.Mock(wraps=sys.stdout)
+        sys.stdout.isatty.return_value = True
+        os.dup2(2, 8)
+    except ImportError:
+        pass
+    which()
